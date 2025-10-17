@@ -1,3 +1,29 @@
+Bacteria [] gross = new Bacteria[50];
+Point delete = new Point((int)(Math.random()*400+50),(int)(Math.random()*400+50));
+int points = 0;
+
+void setup(){
+  size(500,500);
+  for (int i = 0; i < gross.length; i++){
+    gross[i] = new Bacteria();
+  }
+}//end of setup function
+
+void draw(){
+  background(0);
+  delete.show();
+  for (int i = 0; i < gross.length; i++){
+    gross[i].walk();
+    gross[i].show();
+  }
+  if (mouseX <= delete.myX + 20 && mouseX >= delete.myX + 10 && mouseY <= delete.myY + 20 && mouseY >= delete.myY +10){
+      delete.deletes();
+      points = points + 1;
+      delete.back();
+      delete.show();
+}
+}//end of draw function
+
 class Bacteria {
  int myX, myY, myColor, textColor;
  Bacteria (){
@@ -66,28 +92,4 @@ class Point {
 
 
 
-Bacteria [] gross = new Bacteria[50];
-Point delete = new Point((int)(Math.random()*400+50),(int)(Math.random()*400+50));
-int points = 0;
 
-void setup(){
-  size(500,500);
-  for (int i = 0; i < gross.length; i++){
-    gross[i] = new Bacteria();
-  }
-}//end of setup function
-
-void draw(){
-  background(0);
-  delete.show();
-  for (int i = 0; i < gross.length; i++){
-    gross[i].walk();
-    gross[i].show();
-  }
-  if (mouseX <= delete.myX + 20 && mouseX >= delete.myX + 10 && mouseY <= delete.myY + 20 && mouseY >= delete.myY +10){
-      delete.deletes();
-      points = points + 1;
-      delete.back();
-      delete.show();
-}
-}//end of draw function
