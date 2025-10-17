@@ -79,12 +79,12 @@ void setup(){
 
 void draw(){
   background(0);
-  deleto.show();
+  d.show();
   for (int i = 0; i < gross.length; i++){
     gross[i].walk();
     gross[i].show();
   }
-  if (mouseX <= deleto.myX + 20 && mouseX >= deleto.myX + 10 && mouseY <= deleto.myY + 20 && mouseY >= deleto.myY +10){
+  if (mouseX <= d.myX + 20 && mouseX >= d.myX + 10 && mouseY <= d.myY + 20 && mouseY >= d.myY +10){
       d.deleto();
       points = points + 1;
       d.back();
