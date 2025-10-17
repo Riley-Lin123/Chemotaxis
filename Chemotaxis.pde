@@ -52,7 +52,7 @@ class Point {
     fill(255,255,255);
     text("Points: " + points, 420,50);
   }//end of member function show
-  void deletes(){
+  void deleto(){
     myX = 800;
     myY = 800;
   }
@@ -67,7 +67,7 @@ class Point {
 
 
 Bacteria [] gross = new Bacteria[50];
-Point delete = new Point((int)(Math.random()*400+50),(int)(Math.random()*400+50));
+Point d = new Point((int)(Math.random()*400+50),(int)(Math.random()*400+50));
 int points = 0;
 
 void setup(){
@@ -79,15 +79,15 @@ void setup(){
 
 void draw(){
   background(0);
-  delete.show();
+  deleto.show();
   for (int i = 0; i < gross.length; i++){
     gross[i].walk();
     gross[i].show();
   }
-  if (mouseX <= delete.myX + 20 && mouseX >= delete.myX + 10 && mouseY <= delete.myY + 20 && mouseY >= delete.myY +10){
-      delete.deletes();
+  if (mouseX <= deleto.myX + 20 && mouseX >= deleto.myX + 10 && mouseY <= deleto.myY + 20 && mouseY >= deleto.myY +10){
+      d.deleto();
       points = points + 1;
-      delete.back();
-      delete.show();
+      d.back();
+      d.show();
 }
 }//end of draw function
