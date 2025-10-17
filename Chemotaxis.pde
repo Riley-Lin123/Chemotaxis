@@ -1,93 +1,101 @@
+// Bacteria class
 class Bacteria {
- int myX, myY, myColor, textColor;
- Bacteria (){
-   myX = 250;
-   myY = 500;
-   myColor = color((int)(Math.random()*200)+56,(int)(Math.random()*200)+56,(int)(Math.random()*200)+56);
-   textColor = color(255);
-}//end of constructor
+  var myX, myY;
+  var myColor, textColor;
 
- void walk(){
-   
-   if (mouseX > myX) {
-     myX = myX + (int)(Math.random()*7)-1;
-   } else {
-     myX = myX + (int)(Math.random()*7)-5;
-   }
-   if (mouseY > myY) {
-     myY = myY + (int)(Math.random()*7)-1;
-   } else {
-     myY = myY + (int)(Math.random()*7)-5;
-   }
-   if (mouseX == myX && mouseY == myY) {
-     textSize(30);
-     textColor = color(255,255,255);
-     fill(textColor);
-     text("You Lose", 190,250);
-     text("You scored: " + points + " points",100,280);
-     noLoop();
-     
-   }
-}//end of walk member function
+  Bacteria() {
+    myX = 250;
+    myY = 500;
+    myColor = color(random(56, 256), random(56, 256), random(56, 256));
+    textColor = color(255);
+  }
 
-void show(){
-  fill(myColor);
-  ellipse(myX,myY,20,20);
-  noFill();
-}//end of function member show
-}//end of Bacteria class
+  void walk() {
+    if (mouseX > myX) {
+      myX = myX + floor(random(7)) - 1;
+    } else {
+      myX = myX + floor(random(7)) - 5;
+    }
 
+    if (mouseY > myY) {
+      myY = myY + floor(random(7)) - 1;
+    } else {
+      myY = myY + floor(random(7)) - 5;
+    }
+
+    if (mouseX == myX && mouseY == myY) {
+      textSize(30);
+      textColor = color(255, 255, 255);
+      fill(textColor);
+      text("You Lose", 190, 250);
+      text("You scored: " + points + " points", 100, 280);
+      noLoop();
+    }
+  }
+
+  void show() {
+    fill(myColor);
+    ellipse(myX, myY, 20, 20);
+    noFill();
+  }
+}
+
+// Point class
 class Point {
-  int myX, myY;
-  
-  Point(int x, int y){
+  var myX, myY;
+
+  Point(x, y) {
     myX = x;
     myY = y;
-  }//end of constructor
-  void show(){
-    fill(255,0,0);
-    rect(myX, myY, 30,30);
+  }
+
+  void show() {
+    fill(255, 0, 0);
+    rect(myX, myY, 30, 30);
     noFill();
     textSize(10);
-    fill(255,255,255);
-    text("Points: " + points, 420,50);
-  }//end of member function show
-  void deletes(){
+    fill(255, 255, 255);
+    text("Points: " + points, 420, 50);
+  }
+
+  void deletes() {
     myX = 800;
     myY = 800;
   }
-  void back(){
-    myX = (int)(Math.random()*400+50);
-    myY = (int)(Math.random()*400+50);
+
+  void back() {
+    myX = random(50, 450);
+    myY = random(50, 450);
   }
-}//end of Power class
+}
 
+// Main sketch
+var gross = [];
+for (var i = 0; i < 50; i++) {
+  gross.push(new Bacteria());
+}
 
+var deletePoint = new Point(random(50, 450), random(50, 450));
+var points = 0;
 
+void setup() {
+  size(500, 500);
+}
 
-
-Bacteria [] gross = new Bacteria[50];
-Point delete = new Point((int)(Math.random()*400+50),(int)(Math.random()*400+50));
-int points = 0;
-
-void setup(){
-  size(500,500);
-  for (int i = 0; i < gross.length; i++){
-    gross[i] = new Bacteria();
-  }
-}//end of setup function
-
-void draw(){
+void draw() {
   background(0);
-  delete.show();
-  for (int i = 0; i < gross.length; i++){
+  deletePoint.show();
+
+  for (var i = 0; i < gross.length; i++) {
     gross[i].walk();
     gross[i].show();
   }
-  if (mouseX <= delete.myX + 20 && mouseX >= delete.myX + 10 && mouseY <= delete.myY + 20 && mouseY >= delete.myY +10){
-      delete.deletes();
-      points = points + 1;
-      delete.back();
-      delete.show();
+
+  if (mouseX <= deletePoint.myX + 20 && mouseX >= deletePoint.myX + 10 &&
+      mouseY <= deletePoint.myY + 20 && mouseY >= deletePoint.myY + 10) {
+    deletePoint.deletes();
+    points += 1;
+    deletePoint.back();
+    deletePoint.show();
+  }
 }
-}//end of draw function
